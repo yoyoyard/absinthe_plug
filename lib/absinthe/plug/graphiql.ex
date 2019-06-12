@@ -133,14 +133,14 @@ defmodule Absinthe.Plug.GraphiQL do
     :defp,
     :graphiql_html,
     Path.join(@graphiql_template_path, "graphiql.html.eex"),
-    [:query_string, :variables_string, :result_string, :socket_url, :assets]
+    [:query_string, :variables_string, :result_string, :socket_url, :assets, :scope]
   )
 
   EEx.function_from_file(
     :defp,
     :graphiql_workspace_html,
     Path.join(@graphiql_template_path, "graphiql_workspace.html.eex"),
-    [:query_string, :variables_string, :default_headers, :default_url, :socket_url, :assets]
+    [:query_string, :variables_string, :default_headers, :default_url, :socket_url, :assets, :scope]
   )
 
   EEx.function_from_file(
@@ -165,7 +165,8 @@ defmodule Absinthe.Plug.GraphiQL do
           default_url: binary,
           assets: Keyword.t(),
           socket: module,
-          socket_url: binary
+          socket_url: binary,
+          scope: binary
         ]
 
   @doc false
@@ -178,6 +179,7 @@ defmodule Absinthe.Plug.GraphiQL do
     |> Map.put(:interface, Keyword.get(opts, :interface) || :advanced)
     |> Map.put(:default_headers, Keyword.get(opts, :default_headers))
     |> Map.put(:default_url, Keyword.get(opts, :default_url))
+    |> Map.put(:scope, Keyword.get(opts, :scope))
     |> Map.put(:assets, assets)
     |> Map.put(:socket, Keyword.get(opts, :socket))
     |> Map.put(:socket_url, Keyword.get(opts, :socket_url))
@@ -346,7 +348,8 @@ defmodule Absinthe.Plug.GraphiQL do
       opts[:var_string],
       opts[:result],
       opts[:socket_url],
-      opts[:assets]
+      opts[:assets],
+      opts[:scope]
     )
     |> rendered(conn)
   end
@@ -360,7 +363,8 @@ defmodule Absinthe.Plug.GraphiQL do
       opts[:default_headers],
       default_url(opts[:default_url]),
       opts[:socket_url],
-      opts[:assets]
+      opts[:assets],
+      opts[:scope]
     )
     |> rendered(conn)
   end

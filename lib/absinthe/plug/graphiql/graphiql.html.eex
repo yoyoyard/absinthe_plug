@@ -10,9 +10,9 @@ add "&raw" to the end of the URL within a browser.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <title>GraphiQL</title>
-  
+
   <style>
     html, body {
       height: 100%;
@@ -33,7 +33,7 @@ add "&raw" to the end of the URL within a browser.
   <script src="<%= assets["react/react.js"] %>"></script>
   <script src="<%= assets["react-dom/react-dom.js"] %>"></script>
   <script src="<%= assets["graphiql/graphiql.js"] %>"></script>
-  <script src="<%= assets["@absinthe/socket-graphiql/socket-graphiql.js"] %>"></script>
+  <script src="<%= assets["@h1u2i3/socket-graphiql/socket-graphiql.js"] %>"></script>
   <script>
     // Collect the URL parameters
     var parameters = {};
@@ -68,8 +68,13 @@ add "&raw" to the end of the URL within a browser.
     var protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
     var wsUrl = <%= if socket_url do %> <%= socket_url %><% else %>'ws://localhost:4000/socket'<% end %>;
 
-    var subscriptionsClient = new AbsintheSocketGraphiql.SubscriptionsClient(wsUrl, {});
-    var fetcher = AbsintheSocketGraphiql.createFetcher(fetchURL, subscriptionsClient, 'Your subscription data will appear here after server publication!');
+    var subscriptionsClient = new H1u2i3SocketGraphiql.SubscriptionsClient(
+      wsUrl,
+      {},
+      '__absinthe__:taozui:control'
+      // <%= if scope do %> '<%= scope %>' <% else %> null <% end %>
+    );
+    var fetcher = H1u2i3SocketGraphiql.createFetcher(fetchURL, subscriptionsClient, 'Your subscription data will appear here after server publication!');
 
     // When the query and variables string is edited, update the URL bar so
     // that it can be easily shared.

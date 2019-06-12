@@ -22,7 +22,7 @@ add "&raw" to the end of the URL within a browser.
   <script src="<%= assets["react/react.js"] %>"></script>
   <script src="<%= assets["react-dom/react-dom.js"] %>"></script>
   <script src="<%= assets["graphiql-workspace/graphiql-workspace.js"] %>"></script>
-  <script src="<%= assets["@absinthe/socket-graphiql/socket-graphiql.js"] %>"></script>
+  <script src="<%= assets["@h1u2i3/socket-graphiql/socket-graphiql.js"] %>"></script>
   <script type="text/javascript">
     function absintheSubscriptionsClientBuilder(url, connectionParams) {
 
@@ -38,8 +38,12 @@ add "&raw" to the end of the URL within a browser.
                             return obj;
                           }, {});
 
-      return new AbsintheSocketGraphiql.SubscriptionsClient(`${urlObject.origin}${urlObject.pathname}`,
-                                                            {params: Object.assign(urlParams, connectionParams)});
+      return new H1u2i3SocketGraphiql.SubscriptionsClient(
+        `${urlObject.origin}${urlObject.pathname}`,
+        {params: Object.assign(urlParams, connectionParams)},
+        '__absinthe__:taozui:control'
+        // <%= if scope do %> '<%= scope %>' <% else %> null <% end %>
+      );
     }
 
     var protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
