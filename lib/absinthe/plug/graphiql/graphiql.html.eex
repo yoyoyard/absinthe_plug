@@ -71,8 +71,7 @@ add "&raw" to the end of the URL within a browser.
     var subscriptionsClient = new H1u2i3SocketGraphiql.SubscriptionsClient(
       wsUrl,
       {},
-      '__absinthe__:taozui:control'
-      // <%= if scope do %> '<%= scope %>' <% else %> null <% end %>
+      <%= if scope do %> '<%= scope %>' <% else %> null <% end %>
     );
     var fetcher = H1u2i3SocketGraphiql.createFetcher(fetchURL, subscriptionsClient, 'Your subscription data will appear here after server publication!');
 

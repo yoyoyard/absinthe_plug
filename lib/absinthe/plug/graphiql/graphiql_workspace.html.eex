@@ -41,8 +41,7 @@ add "&raw" to the end of the URL within a browser.
       return new H1u2i3SocketGraphiql.SubscriptionsClient(
         `${urlObject.origin}${urlObject.pathname}`,
         {params: Object.assign(urlParams, connectionParams)},
-        '__absinthe__:taozui:control'
-        // <%= if scope do %> '<%= scope %>' <% else %> null <% end %>
+        <%= if scope do %> '<%= scope %>' <% else %> null <% end %>
       );
     }
 
